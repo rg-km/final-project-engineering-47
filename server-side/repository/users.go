@@ -45,8 +45,8 @@ func (u *UserRepository) RegisterUser(name string, username string, email string
 	}
 
 	//Check Jika Username Sudah ada di database Return Error
-	if users.Username != "" {
-		return errors.New("Username already exists")
+	if users.Username != "" && users.Email != "" {
+		return errors.New("Username or Email already exists")
 	} else {
 		//Hashing Password dan Input Ke database
 		hashedPass, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
@@ -85,11 +85,11 @@ func (u *UserRepository) RegisterCamp(name string, username string, email string
 	}
 
 	//Check Jika Username Sudah ada di database Return Error
-	if users.Username != "" || users.Email != "" {
+	if users.Username != "" && users.Email != "" {
 		return errors.New("Username or Email already exists")
 	} else {
 		//Hashing Password dan Input Ke database
-		hashedPass, _ := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
+		hashedPass, _ := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
 
 		if len(hashedPass) != 0 {
 			sqlStmt = "INSERT INTO users (name, username, email, password, role, created_at) VALUES (?, ?, ?, ?, ?, ?);"
