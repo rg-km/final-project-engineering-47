@@ -66,7 +66,7 @@ func (api *API) login(w http.ResponseWriter, r *http.Request) {
 	userID, _ := api.usersRepo.FetchUserID(*res)
 
 	// Deklarasi expiry time untuk token jwt
-	expirationTime := time.Now().Add(5 * time.Minute)
+	expirationTime := time.Now().Add(60 * time.Minute)
 
 	// Buat claim menggunakan variable yang sudah didefinisikan diatas
 	claims := &Claims{

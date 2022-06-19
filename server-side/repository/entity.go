@@ -16,18 +16,18 @@ type User struct {
 }
 
 type ProfilUser struct {
-	ID        int64     `db:"id"`
-	Name      string    `db:"name"`
-	Email     string    `db:"email"`
-	Gender    string    `db:"gender"`
-	Birthdate time.Time `db:"birthdate"`
-	Address   string    `db:"address"`
-	NoHp      int64     `db:"nohp"`
-	Instansi  string    `db:"instansi"`
-	NoInduk   int64     `db:"noinduk"`
-	NamaWali  string    `db:"namawali"`
-	GajiOrtu  string    `db:"gajiortu"`
-	UserID    int64     `db:"user_id"`
+	ID        int64  `db:"id"`
+	Name      string `db:"name"`
+	Email     string `db:"email"`
+	Gender    string `db:"gender"`
+	Birthdate string `db:"birthdate"`
+	Address   string `db:"address"`
+	NoHp      string `db:"nohp"`
+	Instansi  string `db:"instansi"`
+	NoInduk   string `db:"noinduk"`
+	NamaWali  string `db:"namawali"`
+	GajiOrtu  string `db:"gajiortu"`
+	UserID    int64  `db:"user_id"`
 }
 
 type Profil struct {
@@ -35,15 +35,25 @@ type Profil struct {
 	Name     string `db:"name"`
 	Email    string `db:"email"`
 	Address  string `db:"address"`
-	NoHp     int64  `db:"nohp"`
+	NoHp     string `db:"nohp"`
 	Instansi string `db:"instansi"`
 	Username string `db:"username"`
 	UserID   int64  `db:"user_id"`
 }
 
-type Berkas struct {
+type File struct {
 	ID           int64  `db:"id"`
-	File         string `db:"file"`
+	Name         string `db:"name"`
+	Email        string `db:"email"`
+	Gender       string `db:"gender"`
+	Birthdate    string `db:"birthdate"`
+	Address      string `db:"address"`
+	NoHp         string `db:"nohp"`
+	Instansi     string `db:"instansi"`
+	NoInduk      string `db:"noinduk"`
+	NamaWali     string `db:"namawali"`
+	GajiOrtu     string `db:"gajiortu"`
+	Berkas       string `db:"berkas"`
 	Essay        string `db:"essay"`
 	ProfilUserID int64  `db:"profiluser_id"`
 }
