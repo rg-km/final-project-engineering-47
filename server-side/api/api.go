@@ -21,7 +21,7 @@ func NewAPI(usersRepo repository.UserRepository) API {
 	mux.Handle("/api/logout", api.POST(http.HandlerFunc(api.logout)))
 
 	//Admin
-	//mux.Handle("/api/admin/dashboard", api.GET(api.AuthMiddleWare(api.AdminMiddleware(http.HandlerFunc(api.getAdminDashboard)))))
+
 	return api
 }
 
