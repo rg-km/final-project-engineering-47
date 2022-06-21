@@ -17,8 +17,9 @@ func main() {
 	}
 
 	usersRepo := repository.NewUserRepository(db)
+	articlesRepo := repository.NewArticleRepository(db)
 	profilRepo := repository.NewProfilRepository(db)
 
-	mainAPI := api.NewAPI(*usersRepo, *profilRepo)
+	mainAPI := api.NewAPI(*usersRepo, *articlesRepo, *profilRepo)
 	mainAPI.Start()
 }
