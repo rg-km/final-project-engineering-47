@@ -3,6 +3,7 @@ package api
 import (
 	"encoding/json"
 	"net/http"
+	"strconv"
 )
 
 type ArticleListErrorResponse struct {
@@ -17,6 +18,12 @@ type Article struct {
 
 type ArticleListSuccessResponse struct {
 	Article []Article `json:"article"`
+}
+
+type ListByIDSuccessRespone struct {
+	Judul    string `json:"judul"`
+	Isi      string `json:"isi"`
+	Category string `json:"category"`
 }
 
 func (api *API) articleList(w http.ResponseWriter, r *http.Request) {
@@ -53,15 +60,8 @@ func (api *API) articleListByID(w http.ResponseWriter, r *http.Request) {
 	api.AllowOrigin(w, r)
 	encoder := json.NewEncoder(w)
 
-	var requestBody ArticleRequestResponse
-
-	err := json.NewDecoder(r.Body).Decode(&requestBody)
-	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		return
-	}
-
-	articles, err := api.articlesRepo.QueryArticle(requestBody.ID)
+	id, _ := strconv.ParseInt(r.URL.Query().Get("id"), 0, 64)
+	article, err := api.articlesRepo.QueryArticle(id)
 	defer func() {
 		if err != nil {
 			w.WriteHeader(http.StatusBadRequest)
@@ -73,5 +73,11 @@ func (api *API) articleListByID(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	encoder.Encode(articles)
+	response := ListByIDSuccessRespone{}
+	response.Judul = article.Judul
+	response.Isi = article.Isi
+	response.Category = article.Category
+
+	encoder.Encode(response)
+
 }

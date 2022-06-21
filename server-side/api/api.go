@@ -28,14 +28,11 @@ func NewAPI(usersRepo repository.UserRepository, articlesRepo repository.Article
 
 	//Content User
 	mux.Handle("/api/user/dashboard", api.GET(api.AuthMiddleWare(http.HandlerFunc(api.articleList))))
-	mux.Handle("/api/article?{{id}}", api.GET(api.AuthMiddleWare(http.HandlerFunc(api.articleListByID))))
+	mux.Handle("/api/article/full", api.GET(api.AuthMiddleWare(http.HandlerFunc(api.articleListByID))))
 
 	//Content Pengelola
-	mux.Handle("/api/camp/profil", api.POST(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.addProfil)))))
 	mux.Handle("/api/camp/dashboard", api.GET(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.articleByProfilID)))))
 	mux.Handle("/api/camp/dashboard/input", api.POST(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.addArticle)))))
-
-	//Admin
 
 	return api
 }
