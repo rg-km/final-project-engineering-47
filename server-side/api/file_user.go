@@ -3,7 +3,7 @@ package api
 import (
 	"encoding/json"
 	"net/http"
-	"projek/repository"
+	"server-side/repository"
 )
 
 type FileErrorResponse struct {
