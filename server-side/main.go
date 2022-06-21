@@ -10,14 +10,15 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("sqlite3", "./bigdream-app.db")
+	db, err := sql.Open("sqlite3", "./projek.db")
 
 	if err != nil {
 		panic(err)
 	}
 
 	usersRepo := repository.NewUserRepository(db)
+	profilRepo := repository.NewProfilRepository(db)
 
-	mainAPI := api.NewAPI(*usersRepo)
+	mainAPI := api.NewAPI(*usersRepo, *profilRepo)
 	mainAPI.Start()
 }
