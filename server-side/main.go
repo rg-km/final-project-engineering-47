@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	db, err := sql.Open("sqlite3", "./projek.db")
+	db, err := sql.Open("sqlite3", "./bigdream-app.db")
 
 	if err != nil {
 		panic(err)
