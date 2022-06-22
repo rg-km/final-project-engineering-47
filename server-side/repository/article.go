@@ -51,11 +51,11 @@ func (a *ArticleRepository) QueryArticle(id int64) (Article, error) {
 	var sqlStmt string
 	var article Article
 
-	sqlStmt = "SELECT judul, isi, category, profil_id FROM article WHERE id = ?;"
+	sqlStmt = "SELECT judul, isi, category, created_at, profil_id FROM article WHERE id = ?;"
 
 	row := a.db.QueryRow(sqlStmt, id)
 	article.ID = id
-	err := row.Scan(&article.Judul, &article.Isi, &article.Category, &article.ProfilID)
+	err := row.Scan(&article.Judul, &article.Isi, &article.Category, &article.CreatedAt, &article.ProfilID)
 
 	if err != nil {
 		panic(err)
