@@ -44,6 +44,10 @@ func NewAPI(usersRepo repository.UserRepository, articlesRepo repository.Article
 	mux.Handle("/api/camp/dashboard/beasiswa", api.GET(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.listBeasiswa)))))
 
 	//Admin
+	mux.Handle("/api/admin/dashboard", api.GET(api.AuthMiddleWare(api.AdminMiddleware(http.HandlerFunc(api.getAdminDashboard)))))
+	mux.Handle("/api/admin/listUser", api.GET(api.AuthMiddleWare(api.AdminMiddleware(http.HandlerFunc(api.getAdminListUser)))))
+	mux.Handle("/api/admin/listCamp", api.GET(api.AuthMiddleWare(api.AdminMiddleware(http.HandlerFunc(api.getAdminListCamp)))))
+	mux.Handle("/api/admin/list", api.GET(api.AuthMiddleWare(api.AdminMiddleware(http.HandlerFunc(api.getAdminList)))))
 
 	return api
 }
