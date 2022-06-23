@@ -78,12 +78,16 @@ func (p *ProfilReposistory) FetchProfilByUserID(userID int64) (Profil, error) {
 func (p *ProfilReposistory) InsertProfil(profil Profil) error {
 	var sqlStmt string
 
+	if profil.Name == "" || profil.Email == "" || profil.Address == "" || profil.NoHp == "" || profil.Instansi == "" {
+		return errors.New("Cannot Empty")
+	}
+
 	sqlStmt = "INSERT INTO profil (name, email, address, nohp, instansi, user_id) VALUES (?, ?, ?, ?, ?, ?);"
 
 	_, err := p.db.Exec(sqlStmt, profil.Name, profil.Email, profil.Address, profil.NoHp, profil.Instansi, profil.UserID)
 
 	if err != nil {
-		panic(err)
+		return errors.New("Data Already Exists")
 	}
 
 	return nil
@@ -94,9 +98,9 @@ func (p *ProfilReposistory) UpdateProfil(profil Profil) error {
 
 	p.FecthProfil()
 
-	sqlStmt = "UPDATE profil SET name = ?, email = ?, address = ?, nohp = ?, instansi = ? WHERE id = ?;"
+	sqlStmt = "UPDATE profil SET name = ?, email = ?, address = ?, nohp = ?, instansi = ? WHERE id = ? AND user_id = ?;"
 
-	_, err := p.db.Exec(sqlStmt, profil.ID)
+	_, err := p.db.Exec(sqlStmt, profil.Name, profil.Email, profil.Address, profil.NoHp, profil.Instansi, profil.ID, profil.UserID)
 
 	if err != nil {
 		panic(err)

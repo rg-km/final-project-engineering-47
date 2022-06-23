@@ -21,7 +21,8 @@ func main() {
 	email VARCHAR(150) NOT NULL, 
 	password VARCHAR(200) NOT NULL,
 	role VARCHAR(150) NOT NULL,
-	created_at DATETIME NOT NULL
+	created_at DATETIME NOT NULL,
+	CONSTRAINT UC_users UNIQUE (username, email)
 );
 
 	CREATE TABLE IF NOT EXISTS profil_user (
@@ -35,9 +36,10 @@ func main() {
 	instansi VARCHAR(150) NOT NULL,
 	noinduk VARCHAR(20) NOT NULL,
 	namawali VARCHAR(150) NOT NULL,
-	gajiortu VARCHAR(150) NOT NULL,
+	gajiortu "enum('Golongan I','Golongan II', 'Golongan III')" NOT NULL,
 	user_id INTEGER NOT NULL,
-	FOREIGN KEY (user_id) REFERENCES users(id)
+	FOREIGN KEY (user_id) REFERENCES users(id),
+	CONSTRAINT UC_profilUser UNIQUE (email, nohp, noinduk)
 );
 
 	CREATE TABLE IF NOT EXISTS profil (
@@ -48,7 +50,8 @@ func main() {
 	nohp VARCHAR(20) NOT NULL,
 	instansi VARCHAR(150) NOT NULL,
 	user_id INTEGER NOT NULL,
-	FOREIGN KEY (user_id) REFERENCES users(id)
+	FOREIGN KEY (user_id) REFERENCES users(id),
+	CONSTRAINT UC_profil UNIQUE (email, nohp)
 );
 
 	CREATE TABLE IF NOT EXISTS file (

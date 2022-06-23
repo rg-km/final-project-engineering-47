@@ -34,13 +34,12 @@ func (api *API) articleList(w http.ResponseWriter, r *http.Request) {
 	response.Article = make([]Article, 0)
 
 	articles, err := api.articlesRepo.FecthArticle()
-	defer func() {
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			encoder.Encode(DashboardErrorResponse{Error: err.Error()})
-			return
-		}
-	}()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		encoder.Encode(DashboardErrorResponse{Error: err.Error()})
+		return
+	}
+
 	if err != nil {
 		return
 	}
@@ -62,13 +61,11 @@ func (api *API) articleListByID(w http.ResponseWriter, r *http.Request) {
 
 	id, _ := strconv.ParseInt(r.URL.Query().Get("id"), 0, 64)
 	article, err := api.articlesRepo.QueryArticle(id)
-	defer func() {
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			encoder.Encode(DashboardErrorResponse{Error: err.Error()})
-			return
-		}
-	}()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		encoder.Encode(DashboardErrorResponse{Error: err.Error()})
+		return
+	}
 	if err != nil {
 		return
 	}

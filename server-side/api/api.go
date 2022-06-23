@@ -31,16 +31,16 @@ func NewAPI(usersRepo repository.UserRepository, articlesRepo repository.Article
 	//Content User
 	mux.Handle("/api/user/dashboard", api.GET(api.AuthMiddleWare(http.HandlerFunc(api.articleList))))
 	mux.Handle("/api/user/profil", api.POST(api.AuthMiddleWare(http.HandlerFunc(api.addProfilUser))))
-
+	mux.Handle("/api/user/profil/edit", api.POST(api.AuthMiddleWare(http.HandlerFunc(api.editProfilUser))))
 	mux.Handle("/api/user/apply", api.POST(api.AuthMiddleWare(http.HandlerFunc(api.addFile))))
 	mux.Handle("/api/article/full", api.GET(api.AuthMiddleWare(http.HandlerFunc(api.articleListByID))))
 
 	//Content Pengelola
 	mux.Handle("/api/camp/profil", api.POST(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.addProfil)))))
-
+	mux.Handle("/api/camp/profil/edit", api.POST(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.editProfil)))))
 	mux.Handle("/api/camp/dashboard", api.GET(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.articleByProfilID)))))
 	mux.Handle("/api/camp/dashboard/input", api.POST(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.addArticle)))))
-
+	mux.Handle("/api/camp/article/update", api.POST(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.editArticle)))))
 	mux.Handle("/api/camp/dashboard/beasiswa", api.GET(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.listBeasiswa)))))
 
 	//Admin

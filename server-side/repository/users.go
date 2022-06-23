@@ -182,7 +182,7 @@ func (u *UserRepository) Login(username string, password string) (*string, error
 	err := row.Scan(&user.ID, &user.Name, &user.Username, &user.Email, &user.Password, &user.Role)
 
 	if err != nil {
-		return nil, errors.New("Incorrect")
+		return nil, errors.New("Login Failed!")
 	}
 
 	//Compare Hash Password Database
@@ -191,7 +191,7 @@ func (u *UserRepository) Login(username string, password string) (*string, error
 	passHash := bcrypt.CompareHashAndPassword(hashPassword, pass)
 
 	if passHash != nil {
-		return nil, errors.New("Invalid Username and Password")
+		return nil, errors.New("Invalid Username or Password")
 	} else {
 		return &user.Username, nil
 	}
