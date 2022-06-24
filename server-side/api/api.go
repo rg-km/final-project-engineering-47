@@ -9,14 +9,15 @@ import (
 type API struct {
 	usersRepo      repository.UserRepository
 	articlesRepo   repository.ArticleRepository
+	profilRepo     repository.ProfilReposistory
 	profilUserRepo repository.ProfilUserReposistory
 	fileRepo       repository.FileRepository
 	mux            *http.ServeMux
 }
 
-func NewAPI(usersRepo repository.UserRepository, articlesRepo repository.ArticleRepository, profilUserRepo repository.ProfilUserReposistory, fileRepo repository.FileRepository) API {
+func NewAPI(usersRepo repository.UserRepository, articlesRepo repository.ArticleRepository, profilRepo repository.ProfilReposistory, profilUserRepo repository.ProfilUserReposistory, fileRepo repository.FileRepository) API {
 	mux := http.NewServeMux()
-	api := API{usersRepo, articlesRepo, profilUserRepo, fileRepo, mux}
+	api := API{usersRepo, articlesRepo, profilRepo, profilUserRepo, fileRepo, mux}
 
 	//Auth
 	mux.Handle("/api/login", api.POST(http.HandlerFunc(api.login)))
@@ -35,6 +36,7 @@ func NewAPI(usersRepo repository.UserRepository, articlesRepo repository.Article
 	mux.Handle("/api/article/full", api.GET(api.AuthMiddleWare(http.HandlerFunc(api.articleListByID))))
 
 	//Content Pengelola
+	mux.Handle("/api/camp/profil", api.POST(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.addProfil)))))
 
 	mux.Handle("/api/camp/dashboard", api.GET(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.articleByProfilID)))))
 	mux.Handle("/api/camp/dashboard/input", api.POST(api.AuthMiddleWare(api.CampMiddleware(http.HandlerFunc(api.addArticle)))))
