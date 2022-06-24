@@ -53,8 +53,8 @@ func (api *API) AuthMiddleWare(next http.Handler) http.Handler {
 				encoder.Encode(AuthErrorResponse{Error: err.Error()})
 				return
 			}
-			// return bad request ketika field token tidak ada
-			w.WriteHeader(http.StatusBadRequest)
+			// return unauthorized request ketika field token tidak ada
+			w.WriteHeader(http.StatusUnauthorized)
 			encoder.Encode(AuthErrorResponse{Error: err.Error()})
 			return
 		}

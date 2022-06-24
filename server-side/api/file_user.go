@@ -20,8 +20,9 @@ type FileSuccessResponse struct {
 }
 
 type AddFileSuccessResponse struct {
-	Berkas string `json:"berkas"`
-	Essay  string `json:"essay"`
+	Message string `json:"message"`
+	Berkas  string `json:"berkas"`
+	Essay   string `json:"essay"`
 }
 
 func (api *API) addFile(w http.ResponseWriter, r *http.Request) {
@@ -29,6 +30,11 @@ func (api *API) addFile(w http.ResponseWriter, r *http.Request) {
 	var file File
 	encoder := json.NewEncoder(w)
 	err := json.NewDecoder(r.Body).Decode(&file)
+	if file.Berkas == "" {
+		w.WriteHeader(http.StatusBadRequest)
+		encoder.Encode(FileErrorResponse{Error: "Berkas Tidak Boleh Kosong"})
+		return
+	}
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
@@ -51,8 +57,9 @@ func (api *API) addFile(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	encoder.Encode(AddFileSuccessResponse{
-		Berkas: file.Berkas,
-		Essay:  file.Essay,
+		Message: "Success",
+		Berkas:  file.Berkas,
+		Essay:   file.Essay,
 	})
 	return
 }
@@ -65,13 +72,11 @@ func (api *API) listBeasiswa(w http.ResponseWriter, r *http.Request) {
 	response.File = make([]repository.File, 0)
 
 	files, err := api.fileRepo.FecthUserFile()
-	defer func() {
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			encoder.Encode(DashboardErrorResponse{Error: err.Error()})
-			return
-		}
-	}()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		encoder.Encode(DashboardErrorResponse{Error: err.Error()})
+		return
+	}
 	if err != nil {
 		return
 	}

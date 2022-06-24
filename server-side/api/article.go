@@ -25,9 +25,11 @@ type ArticleRequestResponse struct {
 	Judul    string `json:"judul"`
 	Isi      string `json:"isi"`
 	Category string `json:"category"`
+	ProfilID int64  `json:"profil_id"`
 }
 
 type AddArticleSuccessResponse struct {
+	Message  string `json:"message"`
 	Judul    string `json:"judul"`
 	Isi      string `json:"isi"`
 	Category string `json:"category"`
@@ -61,6 +63,7 @@ func (api *API) addArticle(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	encoder.Encode(AddArticleSuccessResponse{
+		Message:  "Success",
 		Judul:    article.Judul,
 		Isi:      article.Isi,
 		Category: article.Category,
@@ -76,12 +79,36 @@ func (api *API) articleByProfilID(w http.ResponseWriter, r *http.Request) {
 
 	article, err := api.articlesRepo.FecthArticleByProfilID(profil.ID)
 	encoder := json.NewEncoder(w)
-	defer func() {
-		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			encoder.Encode(ArticleErrorResponse{Error: err.Error()})
-		}
-	}()
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		encoder.Encode(ArticleErrorResponse{Error: err.Error()})
+	}
 
 	encoder.Encode(ArticleSuccessResponse{Article: article})
+}
+
+func (api *API) editArticle(w http.ResponseWriter, r *http.Request) {
+	var article ArticleRequestResponse
+	encoder := json.NewEncoder(w)
+	err := json.NewDecoder(r.Body).Decode(&article)
+	if err != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		return
+	}
+
+	err = api.articlesRepo.UpdateArticle(article.Judul, article.Isi, article.ID, article.ProfilID)
+	if err != nil {
+		w.WriteHeader(http.StatusInternalServerError)
+		encoder.Encode(ArticleErrorResponse{Error: err.Error()})
+		return
+	}
+
+	w.WriteHeader(http.StatusOK)
+	encoder.Encode(AddArticleSuccessResponse{
+		Message:  "Success",
+		Judul:    article.Judul,
+		Isi:      article.Isi,
+		Category: article.Category,
+	})
+	return
 }
