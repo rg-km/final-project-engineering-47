@@ -17,6 +17,7 @@ type User struct {
 
 type LoginSuccessResponse struct {
 	Token string `json:"token"`
+	Role  string `json:"role"`
 }
 
 type RegisterSuccessResponse struct {
@@ -66,7 +67,7 @@ func (api *API) login(w http.ResponseWriter, r *http.Request) {
 	userID, _ := api.usersRepo.FetchUserID(*res)
 
 	// Deklarasi expiry time untuk token jwt
-	expirationTime := time.Now().Add(60 * time.Minute)
+	expirationTime := time.Now().Add(6 * time.Hour)
 
 	// Buat claim menggunakan variable yang sudah didefinisikan diatas
 	claims := &Claims{
@@ -98,7 +99,7 @@ func (api *API) login(w http.ResponseWriter, r *http.Request) {
 	})
 
 	//Response Success Login
-	json.NewEncoder(w).Encode(LoginSuccessResponse{Token: tokenString})
+	json.NewEncoder(w).Encode(LoginSuccessResponse{Token: tokenString, Role: *userRole})
 }
 
 //Function Register User
@@ -180,7 +181,7 @@ func (api *API) logout(w http.ResponseWriter, r *http.Request) {
 
 	//Chek Token Value Kosong
 	if token.Value == "" {
-		//Maka Retrun Unauthorized
+		//Maka Return Unauthorized
 		w.WriteHeader(http.StatusUnauthorized)
 		return
 	}

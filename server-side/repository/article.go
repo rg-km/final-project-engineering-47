@@ -109,7 +109,23 @@ func (a *ArticleRepository) FecthArticleByProfilID(profilID int64) ([]Article, e
 func (a *ArticleRepository) InsertArticle(article Article) error {
 	var sqlStmt string
 
-	sqlStmt = "INSERT INTO article (judul, isi, category, created_at ,profil_id) VALUES (?, ?, ?, ?, ?);"
+	mapCategory := map[string]bool{
+		"Science":           true,
+		"Education":         true,
+		"Culture Knowledge": true,
+		"Finance":           true,
+		"Tech":              true,
+	}
+
+	if article.Judul == "" || article.Isi == "" {
+		return errors.New("Cannot Empty")
+	}
+
+	if !mapCategory[article.Category] {
+		return errors.New("No Category Available")
+	}
+
+	sqlStmt = "INSERT INTO article (judul, isi, category, created_at, profil_id) VALUES (?, ?, ?, ?, ?);"
 
 	_, err := a.db.Exec(sqlStmt, article.Judul, article.Isi, article.Category, time.Now(), article.ProfilID)
 
@@ -120,14 +136,12 @@ func (a *ArticleRepository) InsertArticle(article Article) error {
 	return nil
 }
 
-func (a *ArticleRepository) UpdateArticle(article Article) error {
+func (a *ArticleRepository) UpdateArticle(judul string, isi string, id int64, profil_id int64) error {
 	var sqlStmt string
 
-	a.QueryArticle(article.ID)
+	sqlStmt = "UPDATE article SET judul = ?, isi = ? WHERE id = ? AND profil_id =?;"
 
-	sqlStmt = "UPDATE article SET judul = ?, isi = ? WHERE id = ?;"
-
-	_, err := a.db.Exec(sqlStmt, article.ID)
+	_, err := a.db.Exec(sqlStmt, judul, isi, id, profil_id)
 
 	if err != nil {
 		panic(err)
