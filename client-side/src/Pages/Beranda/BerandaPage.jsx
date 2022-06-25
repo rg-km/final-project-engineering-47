@@ -16,4 +16,4 @@ const BerandaPage = () => {
     );
 }
 
-export default BerandaPage;
+export default BerandaPage; 
