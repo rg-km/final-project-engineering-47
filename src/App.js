@@ -1,10 +1,11 @@
-import Footer from "./components/Footer";
 import DaftarProgram from "./pages/DaftarProgram";
+import FormBeasiswa from "./components/FormBeasiswa";
 
 function App() {
   return (
     <>
-    <DaftarProgram />
+    {/* <DaftarProgram /> */}
+    <FormBeasiswa />
     </>
   );
 }
