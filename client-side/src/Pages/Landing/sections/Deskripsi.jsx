@@ -22,13 +22,12 @@ const Deskripsi = () => {
                     inginkan dengan adanya jaminan biaya tanggungan dari kampus itu sendiri.
                 </Text>
 
-
-
-
-
             </Container>
+            
         </Box >
+        
     );
+    
 }
 
 export default Deskripsi;
