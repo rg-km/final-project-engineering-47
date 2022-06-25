@@ -25,7 +25,6 @@ import { EmailIcon, LockIcon } from '@chakra-ui/icons';
 import { Button } from '@chakra-ui/react';
 import { useDisclosure } from "@chakra-ui/react";
 import axios from "axios";
-import { Form } from "react-bootstrap";
 import swal from "sweetalert2";
 const Signup = () => {
 
