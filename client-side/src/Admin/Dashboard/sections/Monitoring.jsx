@@ -7,15 +7,111 @@ import Besu from '../../../Images/besu.svg';
 import Lpdp from '../../../Images/lpdp.svg';
 import Pertamina from '../../../Images/pertamina.svg';
 import Tanato from '../../../Images/tanato.svg';
+import Modal from './Modal';
+import {
+    Table,
+    Thead,
+    Tbody,
+    Tfoot,
+    Tr,
+    Th,
+    Td,
+    TableCaption,
+    TableContainer,
+} from '@chakra-ui/react'
 const Monitoring = () => {
     return (
+
         <Box
-            bg={useColorModeValue('#E5DDC8')}
+            bg={useColorModeValue('#ffff')}
             color={useColorModeValue('black')}
             backgroundSize="cover">
-            <Center h='100px' ml='auto' mr='auto' color='black'>
+            <SimpleGrid columns={1} spacing={10}>
+                <Box height='auto'>
+                <Center h='100px' ml='auto' mr='auto' color='black'>
                 <Heading>Daftar Peserta</Heading>
+
             </Center>
+            <TableContainer color='black' height='auto' pr='400px' pl='400px'>
+                <Table variant='simple'>
+                    <TableCaption>BigDream 2022</TableCaption>
+                    <Thead>
+                        <Tr>
+                            <Th>Nama Peserta</Th>
+                            <Th>Created By</Th>
+                            <Th isNumeric>Detail</Th>
+                        </Tr>
+                    </Thead>
+                    <Tbody>
+                        <Tr>
+                            <Td>Bukhari Naufal</Td>
+                            <Td>12 June 2022</Td>
+                            <Td isNumeric>
+                                <div>
+                                    <Modal />
+                                </div>
+                            </Td>
+                        </Tr>
+                        <Tr>
+                            <Td>Bukhari Naufal</Td>
+                            <Td>12 June 2022</Td>
+                            <Td isNumeric>
+                                <div>
+                                    <Modal />
+                                </div>
+                            </Td>
+                        </Tr>
+                        <Tr>
+                            <Td>Bukhari Naufal</Td>
+                            <Td>12 June 2022</Td>
+                            <Td isNumeric>
+                                <div>
+                                    <Modal />
+                                </div>
+                            </Td>
+                        </Tr>
+                        <Tr>
+                            <Td>Bukhari Naufal</Td>
+                            <Td>12 June 2022</Td>
+                            <Td isNumeric>
+                                <div>
+                                    <Modal />
+                                </div>
+                            </Td>
+                        </Tr>
+                        <Tr>
+                            <Td>Bukhari Naufal</Td>
+                            <Td>12 June 2022</Td>
+                            <Td isNumeric>
+                                <div>
+                                    <Modal />
+                                </div>
+                            </Td>
+                        </Tr>
+                        <Tr>
+                            <Td>Bukhari Naufal</Td>
+                            <Td>12 June 2022</Td>
+                            <Td isNumeric>
+                                <div>
+                                    <Modal />
+                                </div>
+                            </Td>
+                        </Tr>
+                        <Tr>
+                            <Td>Bukhari Naufal</Td>
+                            <Td>12 June 2022</Td>
+                            <Td isNumeric>
+                                <div>
+                                    <Modal />
+                                </div>
+                            </Td>
+                        </Tr>
+                    </Tbody>
+                </Table>
+            </TableContainer>
+                </Box>
+            </SimpleGrid>
+            
         </Box >
 
     );

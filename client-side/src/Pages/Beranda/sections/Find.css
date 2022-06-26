@@ -21,5 +21,7 @@
     position: relative;
     margin: 10px;
 }
-
+.image:hover {
+    background-color:transparent;
+}
 

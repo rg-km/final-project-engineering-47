@@ -31,8 +31,8 @@ const Find = () => {
                         <a className="a">About</a>
                         <a className="a">Notifications</a>
                         <Menu>
-                            <MenuButton as={Button} colorScheme='red'>
-                                Profile
+                            <MenuButton className="image" >
+                                <Image  src={User}></Image>
                             </MenuButton>
                             <MenuList>
                                 <MenuGroup title='Profile'>
