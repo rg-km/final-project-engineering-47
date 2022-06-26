@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 	"server-side/repository"
+	"strconv"
 )
 
 type ProfilUserErrorResponse struct {
@@ -24,6 +25,7 @@ type ProfilUser struct {
 }
 
 type AddProfilUserSuccessResponse struct {
+	Message   string `json:"message"`
 	Name      string `json:"name"`
 	Email     string `json:"email"`
 	Gender    string `json:"gender"`
@@ -64,12 +66,13 @@ func (api *API) addProfilUser(w http.ResponseWriter, r *http.Request) {
 	})
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		encoder.Encode(ProfilUserErrorResponse{Error: err.Error()})
+		encoder.Encode(ProfilErrorResponse{Error: err.Error()})
 		return
 	}
 
 	w.WriteHeader(http.StatusOK)
 	encoder.Encode(AddProfilUserSuccessResponse{
+		Message:   "Success",
 		Name:      profilUser.Name,
 		Email:     profilUser.Email,
 		Gender:    profilUser.Gender,
@@ -97,7 +100,12 @@ func (api *API) editProfilUser(w http.ResponseWriter, r *http.Request) {
 
 	userID := r.Context().Value("id").(int64)
 
+	id, _ := strconv.ParseInt(r.URL.Query().Get("id"), 0, 64)
+
+	_, err = api.profilUserRepo.FetchProfilUserByID(id)
+
 	err = api.profilUserRepo.UpdateProfilUser(repository.ProfilUser{
+		ID:        id,
 		Name:      profilUser.Name,
 		Email:     profilUser.Email,
 		Gender:    profilUser.Gender,
@@ -119,6 +127,7 @@ func (api *API) editProfilUser(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	encoder.Encode(AddProfilUserSuccessResponse{
+		Message:   "Success",
 		Name:      profilUser.Name,
 		Email:     profilUser.Email,
 		Gender:    profilUser.Gender,
