@@ -18,7 +18,8 @@ import {
     InputLeftElement,
     Image,
     Alert,
-    AlertIcon
+    AlertIcon,
+    Heading
 } from '@chakra-ui/react';
 import { VStack } from '@chakra-ui/react'
 import { EmailIcon, LockIcon } from '@chakra-ui/icons';
@@ -75,28 +76,28 @@ const Signup = () => {
                 <Modal isOpen={onOpen} onClose={() => { Navigate("/"); }}>
                     <ModalOverlay />
                     <ModalContent borderRadius={30}>
-                        <ModalHeader >
+                        {/* <ModalHeader >
                             <Center>
                                 <Image width='75px' src={user} />
                             </Center>
-                        </ModalHeader>
+                        </ModalHeader> */}
 
                         <ModalCloseButton />
                         <form onSubmit={register} >
                             <VStack>
-                                <ModalBody width='350px' justifyContent='center'>
-
+                                <ModalBody width='350px' justifyContent='center' mt={'3em'}>
+                                    <Heading align='center' mb={'1em'}>Registrasi CAMP</Heading>
                                     <FormControl>
                                         <InputGroup mb={5}>
                                             <InputLeftElement
                                                 pointerEvents='none'
-                                                children={< Image src={usernamed} width='20px' />}
+                                                children={< Image src={usernamed} width='17px' />}
                                             />
 
                                             <Input id='name' onChange={(e) => { setName(e.target.value) }} type='username' value={name} variant='flushed' placeholder='Name' />
                                         </InputGroup>
 
-                                    </FormControl>
+                                    {/* </FormControl>
                                     <FormControl >
                                         <InputGroup mb={5}>
                                             <InputLeftElement
@@ -105,7 +106,7 @@ const Signup = () => {
                                             />
                                             <Input onChange={(e) => { setUsername(e.target.value) }} value={username} id='username' type='username' variant='flushed' placeholder='Username' />
 
-                                        </InputGroup>
+                                        </InputGroup> */}
                                     </FormControl>
                                     <FormControl>
                                         <InputGroup mb={5}>
@@ -138,7 +139,7 @@ const Signup = () => {
                                     {msg}{error}
                                     <FormControl>
                                         <Center>
-                                            <Button type='submit' mt={10} mb={10} borderRadius={30} bg="#01949A" color='white' _hover=''>Sign Up</Button>
+                                            <Button type='submit' mt={5} mb={8} borderRadius={30} bg="#01949A" color='white' _hover=''>Sign Up</Button>
                                         </Center>
                                     </FormControl>
 
