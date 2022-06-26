@@ -51,8 +51,8 @@ const Beasiswa = () => {
 
                 <SimpleGrid columns={2} mt='-80px' spacing={10}>
                     <Box height='auto'>
-                        <Container ml='auto' as={Stack} maxW={'6xl'} py={16} color="white">
-                            <Image ml='300px' width='500px' src={Besu}></Image>
+                        <Container as={Stack} maxW={'6xl'} py={16} color="white">
+                            <Image width='500px' src={Besu}></Image>
                         </Container>
                     </Box>
                     <Box height='auto'>

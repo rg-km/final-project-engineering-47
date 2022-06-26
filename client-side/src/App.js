@@ -6,6 +6,7 @@ import {BrowserRouter,Route, Routes} from 'react-router-dom';
 import Header from './Components/header';
 import LandingPage from './Pages/Landing/LandingPage'
 import BerandaPage from './Pages/Beranda/BerandaPage'
+import DashboardPage from './Admin/Dashboard/DashboardPage'
 import Registrasi from './Pages/registrasi';
 
 function App() {
@@ -17,6 +18,8 @@ function App() {
       <Route path="/register" element={<Signup />}>
       </Route>
       <Route path="/beranda" element={<BerandaPage />}>
+      </Route>
+      <Route path="/Dashboard" element={<DashboardPage />}>
       </Route>
       {/* <Route path="/" element={<Login />}>
       </Route> */}

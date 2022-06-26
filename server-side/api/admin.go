@@ -64,7 +64,7 @@ func (api *API) getAdminListCamp(w http.ResponseWriter, r *http.Request) {
 
 	return
 }
-
+	``
 func (api *API) getAdminList(w http.ResponseWriter, r *http.Request) {
 	api.AllowOrigin(w, r)
 
