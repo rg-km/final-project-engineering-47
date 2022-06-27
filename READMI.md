@@ -10,5 +10,5 @@ Username : hadisadik
 Password : 123456
 
 Role admin
-Username : campadmin
+Username : admincamp
 Password : 123456
