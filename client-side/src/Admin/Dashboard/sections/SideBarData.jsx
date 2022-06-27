@@ -12,7 +12,7 @@ export const SidebarData = [
   },
   {
     title: 'Daftar Postingan',
-    path: '/dashboard',
+    path: '/dataArtikel',
     icon: <IoIcons.IoIosPaper />,
     cName: 'nav-text'
   },
@@ -24,7 +24,7 @@ export const SidebarData = [
   },
   {
     title: 'Daftar Instansi',
-    path: '/messages',
+    path: '/dataCamp',
     icon: <FaIcons.FaEnvelopeOpenText />,
     cName: 'nav-text'
   },

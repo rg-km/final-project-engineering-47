@@ -8,6 +8,7 @@ import LandingPage from './Pages/Landing/LandingPage'
 import BerandaPage from './Pages/Beranda/BerandaPage'
 import DashboardPage from './Admin/Dashboard/DashboardPage'
 import DataPostPage from './Admin/DataPost/DataPostPage'
+import DataCampPage from './Admin/DataCamp/DataCampPage'
 import Registrasi from './Pages/registrasi';
 
 function App() {
@@ -23,6 +24,8 @@ function App() {
       <Route path="/Dashboard" element={<DashboardPage />}>
       </Route>
       <Route path="/dataArtikel" element={<DataPostPage />}>
+      </Route>
+      <Route path="/dataCamp" element={<DataCampPage />}>
       </Route>
       {/* <Route path="/" element={<Login />}>
       </Route> */}
