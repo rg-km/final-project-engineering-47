@@ -7,6 +7,7 @@ import Header from './Components/header';
 import LandingPage from './Pages/Landing/LandingPage'
 import BerandaPage from './Pages/Beranda/BerandaPage'
 import DashboardPage from './Admin/Dashboard/DashboardPage'
+import DataPostPage from './Admin/DataPost/DataPostPage'
 import Registrasi from './Pages/registrasi';
 
 function App() {
@@ -20,6 +21,8 @@ function App() {
       <Route path="/beranda" element={<BerandaPage />}>
       </Route>
       <Route path="/Dashboard" element={<DashboardPage />}>
+      </Route>
+      <Route path="/dataArtikel" element={<DataPostPage />}>
       </Route>
       {/* <Route path="/" element={<Login />}>
       </Route> */}
